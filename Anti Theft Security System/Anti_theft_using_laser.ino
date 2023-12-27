@@ -1,20 +1,25 @@
 // C++ code
-//
+
+int buzzerPin = 7;
+
+
 void setup()
 {
-  pinMode(7,OUTPUT);
+  pinMode(buzzerPin,OUTPUT);
   pinMode(A0,INPUT);
 }
 
 void loop()
 {
   int val = analogRead(A0);
+  digitalWrite(buzzerPin,LOW);
   if(val>800)
   {
-    digitalWrite(7,HIGH);
+    digitalWrite(buzzerPin,HIGH);
+    delay(5000);
   }
   else
   {
-    digitalWrite(7,LOW);
+    digitalWrite(buzzerPin,LOW);
   }
 }
