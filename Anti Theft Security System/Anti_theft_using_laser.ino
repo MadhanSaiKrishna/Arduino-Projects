@@ -1,25 +1,18 @@
-// C++ code
-
+int ldrPin = 8;
 int buzzerPin = 7;
 
-
-void setup()
-{
-  pinMode(buzzerPin,OUTPUT);
-  pinMode(A0,INPUT);
+void setup() {
+  pinMode(ldrPin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
 }
 
-void loop()
-{
-  int val = analogRead(A0);
-  digitalWrite(buzzerPin,LOW);
-  if(val>800)
-  {
-    digitalWrite(buzzerPin,HIGH);
-    delay(5000);
-  }
-  else
-  {
-    digitalWrite(buzzerPin,LOW);
+void loop() {
+  
+  int ldrPinvalue = digitalRead(ldrPin);
+
+  if (ldrPinvalue == HIGH) {
+    tone(buzzerPin, 1000);
+    delay(1000); 
+    noTone(buzzerPin);
   }
 }
