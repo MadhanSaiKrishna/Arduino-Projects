@@ -5,6 +5,8 @@
 #define resetButton 8
 
 double tmp=0.0;
+double val = 0.0;
+double time;
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
@@ -22,28 +24,39 @@ void setup()
 void loop()
 {
   int start = digitalRead(startButton);
-  delay(50);
-  int stop = digitalRead(stopButton);
-  delay(50);
-  int reset = digitalRead(resetButton);
-  delay(50);
   if(start == LOW)
   {
-    while(stop)
+    while(true)
     {
+      int stop = digitalRead(stopButton);
+      if(stop == LOW)
+      {
+        tmp = time;
+        lcd.clear();
+        lcd.print(tmp);
+        break;
+      }
+      int reset = digitalRead(resetButton);
+      if(reset==LOW)
+      {
+   		 lcd.clear();
+    	 time = 0.0;
+    	 lcd.print(time);
+  	  }
       lcd.clear();
-      double time = millis()/1000.0;
       lcd.print(time);
+      time+= 0.10;
       delay(100);
     }
     
-  }  
-  if(stop == LOW)
-  {
-    lcd.print("STOP");
-  }  
+  }
+  
+  int reset = digitalRead(resetButton);
+  delay(50);
   if(reset==LOW)
   {
     lcd.clear();
+    time = 0.0;
+    lcd.print(time);
   }
 }
